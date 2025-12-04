@@ -39,6 +39,12 @@ struct Sip
     int InvestmentTenure; // in years 
 };
 
+///////////////////////////////////////////////////////////////
+//
+// Structure : LoginPage
+// Use : Holds information about customer login details
+//
+///////////////////////////////////////////////////////////////
 struct LoginPage
 {
     char UserName[20];
@@ -46,6 +52,12 @@ struct LoginPage
     char FileName[20];
 };
 
+///////////////////////////////////////////////////////////////
+//
+// Function : CustomerAccount
+// Use : Customer account details
+//
+///////////////////////////////////////////////////////////////
 void CustomerAccount(struct LoginPage* LoginPage)
 {
     FILE *fp;
@@ -54,7 +66,7 @@ void CustomerAccount(struct LoginPage* LoginPage)
 
     fp = fopen("CustomerLogin.txt", "r");
 
-    if (!fp)
+    if(!fp)
     {
         printf("Error opening file..!\n");
         exit(EXIT_FAILURE);
@@ -68,31 +80,37 @@ void CustomerAccount(struct LoginPage* LoginPage)
     while (1)
     {
         ch = getch();
-        if (ch == 13)  // Enter key
-            break;
-        else if (ch == 8) // Backspace
+
+        // Enter key
+        if(ch == 13)  
         {
-            if (i > 0)
+            break;
+        }
+        // Backspace
+        else if(ch == 8) 
+        {
+            if(i > 0)
             {
                 i--;
                 printf("\b \b");
             }
         }
-        else if (i < 15)
+        else if(i < 15)
         {
             LoginPage->Password[i++] = ch;
             printf("*");
         }
     }
+    
     LoginPage->Password[i] = '\0';
     printf("\n");
 
     // Read file line by line
-    while (fgets(Line, sizeof(Line), fp))
+    while(fgets(Line, sizeof(Line), fp))
     {
-        if (sscanf(Line, "%[^,],%s", FileUser, FilePass) == 2)
+        if(sscanf(Line, "%[^,],%s", FileUser, FilePass) == 2)
         {
-            if (strcmp(FileUser, LoginPage->UserName) == 0 &&
+            if(strcmp(FileUser, LoginPage->UserName) == 0 &&
                 strcmp(FilePass, LoginPage->Password) == 0)
             {
                 Found = 1;
@@ -103,13 +121,13 @@ void CustomerAccount(struct LoginPage* LoginPage)
 
     fclose(fp);
 
-    if (Found)
+    if(Found)
     {
-        printf("\nLogin Successful!\n\n");
+        printf("\nLogin Successful...\n\n");
     }
     else
     {
-        printf("\nInvalid Username or Password!\n");
+        printf("\nInvalid Username or Password...!\n");
         exit(EXIT_FAILURE);
     }
 }
@@ -392,3 +410,4 @@ int main()
 
     return 0;
 }
+
