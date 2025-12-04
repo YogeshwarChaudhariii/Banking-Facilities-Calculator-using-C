@@ -1,6 +1,8 @@
 #include<stdio.h>
 #include<math.h>
 #include<stdlib.h>
+#include<conio.h>
+#include<string.h>
 
 ////////////////////////////////////////////////////////////////
 //
@@ -36,6 +38,82 @@ struct Sip
     double AnnualInterestRate;
     int InvestmentTenure; // in years 
 };
+
+struct LoginPage
+{
+    char UserName[20];
+    char Password[16];
+    char FileName[20];
+};
+
+void CustomerAccount(struct LoginPage* LoginPage)
+{
+    FILE *fp;
+    char Line[100], FileUser[20], FilePass[16], ch;
+    int i = 0, Found = 0;
+
+    fp = fopen("CustomerLogin.txt", "r");
+
+    if (!fp)
+    {
+        printf("Error opening file..!\n");
+        exit(EXIT_FAILURE);
+    }
+
+    printf("Enter your UserName: ");
+    scanf("%s", LoginPage->UserName);
+
+    printf("Enter your Password: ");
+
+    while (1)
+    {
+        ch = getch();
+        if (ch == 13)  // Enter key
+            break;
+        else if (ch == 8) // Backspace
+        {
+            if (i > 0)
+            {
+                i--;
+                printf("\b \b");
+            }
+        }
+        else if (i < 15)
+        {
+            LoginPage->Password[i++] = ch;
+            printf("*");
+        }
+    }
+    LoginPage->Password[i] = '\0';
+    printf("\n");
+
+    // Read file line by line
+    while (fgets(Line, sizeof(Line), fp))
+    {
+        if (sscanf(Line, "%[^,],%s", FileUser, FilePass) == 2)
+        {
+            if (strcmp(FileUser, LoginPage->UserName) == 0 &&
+                strcmp(FilePass, LoginPage->Password) == 0)
+            {
+                Found = 1;
+                break;
+            }
+        }
+    }
+
+    fclose(fp);
+
+    if (Found)
+    {
+        printf("\nLogin Successful!\n\n");
+    }
+    else
+    {
+        printf("\nInvalid Username or Password!\n");
+        exit(EXIT_FAILURE);
+    }
+}
+
 
 ///////////////////////////////////////////////////////////////
 //
@@ -181,6 +259,91 @@ void SipFormulaImplementation()
 
 ///////////////////////////////////////////////////////////////
 //
+// Function : HomePage
+// Use : Displays home page and handles login
+//
+///////////////////////////////////////////////////////////////
+void HomePage()
+{
+    struct LoginPage login;
+    int iOption = 0;
+
+    printf("\n=========== Banking Facilities Calculator ===========\n");
+    printf("1. Login\n");
+    printf("2. Login as Guest\n");
+    printf("0. Exit\n");
+    printf("Enter the Option: \n");
+    scanf("%d",&iOption);
+    printf("=====================================================\n");
+
+    if (iOption == 1)
+    {
+        CustomerAccount(&login);
+
+        printf("\n=========== Banking Facilities Calculator ===========\n");
+        printf("1. Calculate EMI\n");
+        printf("2. Calculate SIP\n");
+        printf("0. Exit\n");
+        printf("Enter the Option: \n");
+        scanf("%d",&iOption);
+        printf("=====================================================\n");
+
+        if (iOption == 1)
+        {
+            EmiFormulaImplementation();
+        }
+        else if (iOption == 2)
+        {
+            SipFormulaImplementation();
+        }
+        else if (iOption == 0)
+        {
+            exit(EXIT_SUCCESS);
+        }
+        else
+        {
+            printf("Invalid Choice");
+        }
+    }
+    else if (iOption == 2)
+    {
+        printf("\n=========== Banking Facilities Calculator ===========\n");
+        printf("1. Calculate EMI\n");
+        printf("2. Calculate SIP\n");
+        printf("0. Exit\n");
+        printf("Enter the Option: \n");
+        scanf("%d",&iOption);
+        printf("=====================================================\n");
+
+        if (iOption == 1)
+        {
+            EmiFormulaImplementation();
+        }
+        else if (iOption == 2)
+        {
+            SipFormulaImplementation();
+        }
+        else if (iOption == 0)
+        {
+            exit(EXIT_SUCCESS);
+        }
+        else
+        {
+            printf("Invalid Choice");
+        }
+    }
+    else if (iOption == 0)
+    {
+        exit(EXIT_SUCCESS);
+    }
+    else
+    {
+        printf("Invalid Choice");
+    }
+}
+
+///////////////////////////////////////////////////////////////
+//
 // Function : SelectOption
 // Use : Displays menu and navigates to selected option
 //
@@ -223,6 +386,7 @@ void SelectOption()
 /////////////////////////////////////////////////////////////////
 int main()
 {
+    HomePage();
     SelectOption();
    
 
