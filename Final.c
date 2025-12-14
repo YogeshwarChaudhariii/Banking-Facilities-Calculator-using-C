@@ -40,6 +40,12 @@ struct Sip
     int InvestmentTenure; // in years 
 };
 
+///////////////////////////////////////////////////////////////
+//
+// Structure : LoginPage
+// Use : Holds information about client login credentials.
+//
+///////////////////////////////////////////////////////////////
 struct LoginPage
 {
     char UserName[20];
@@ -293,7 +299,7 @@ void SipFormulaImplementation()
     FormatAmount(Returns, ReturnsStr);
     FormatAmount(FutureValue, FutureStr);
 
-
+    // Output
     printf("\n=========== SIP CALCULATION RESULT ===========\n");
     printf("Monthly SIP Amount   : %s rs\n", MonthlyStr);
     printf("Total Months         : %d \n", Tenure);
@@ -457,3 +463,4 @@ int main()
 
     return 0;
 }
+
