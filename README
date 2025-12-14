@@ -1,0 +1,41 @@
+About Project:
+
+Project Name: Banking Facilities Calculator (EMI & SIP) Using C Language.
+Author: Yogeshwar Prakash Chaudhari.
+File Name: Final.c
+
+////////////////////////////////////////////////////////////////////////
+//
+// Introduction:
+//
+////////////////////////////////////////////////////////////////////////
+1) The Banking Facilities Calculator is a menu-driven C application designed to assist users in performing common 
+financial calculations such as EMI (Equated Monthly Installment) and SIP (Systematic Investment Plan).
+2) The application supports user login, guest access, and displays all monetary values using 
+the Indian number system with commas, making the output user-friendly and realistic.
+
+////////////////////////////////////////////////////////////////////////
+//
+// Objectives:
+//
+////////////////////////////////////////////////////////////////////////
+1) To calculate Loan EMI accurately.
+2) To calculate SIP investment returns.
+3) To implement user authentication.
+4) To format currency values using Indian comma system.
+5) To apply modular programming concepts in C.
+6) To improve understanding of structures, functions, and file handling.
+
+////////////////////////////////////////////////////////////////////////
+//
+// Conclusion:
+//
+////////////////////////////////////////////////////////////////////////
+The Banking Facilities Calculator successfully demonstrates the use of C programming concepts such as:
+
+1) Structures
+2) Functions
+3)File handling
+4) Mathematical calculations
+5) Modular design
+6) It provides a real-world financial application and serves as a strong academic project.
